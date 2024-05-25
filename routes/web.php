@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Models\Admin;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +24,10 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    $name = Auth::user()->name;
+
     $parcel = Admin::all();
-    return view('dashboard', compact('parcel', 'name'));
+    $parcelUser = null;
+    return view('dashboard', compact('parcel', 'parcelUser'));
 })->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -36,5 +39,7 @@ Route::get('/add', [AdminController::class, 'create']);
 Route::post('/add', [AdminController::class, 'store']);
 Route::get("/edit/{id}", [AdminController::class, 'edit']);
 Route::get("/add/{id}", [AdminController::class, 'update']);
+
+Route::post('/search', [Controller::class, 'search']);
 
 require __DIR__ . '/auth.php';
