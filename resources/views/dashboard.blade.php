@@ -1,84 +1,92 @@
 @extends('layouts.app')
 @section('content')
 <div>
-    <div name="header" class="bg-white dark:bg-gray-800 shadow max-w-7xl my-5 mx-auto py-6 px-4 sm:px-6 lg:px-8">
 
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            @if(Auth::user()->email == 'admin@123.com')
-            {{ __('Admin Dashboard') }}
-            @else
-            {{__('User Dashboard')}}
-            @endif
-        </h2>
+    <div name="header" class="flex px-20 w-full bg-blue-100 justify-between items-center">
+        <div class="px-5 py-3">
+
+            <img src="{{('images/logo.png')}}" alt="">
+        </div>
+
+        <div class="px-5 py-3 text-xl font-bold flex gap-10">
+            <a href="#home">Home</a>
+            <a href="#track">Tracker</a>
+            <a href="#service">Service</a>
+            <a href="#review">Reviews</a>
+        </div>
+        <div class="px-5 py-3">
+            <a href="#contact"> <button class="bg-blue-800 rounded-xl px-5 py-2 text-white">Contact</button></a>
+        </div>
+
     </div>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100 flex gap-5 flex-col">
+    <div class="container mx-auto px-20 py-15 my-10 " id="add">
+        <div class="">
 
+            <a href="/add"> <button class="bg-blue-800 rounded px-4 py-2 text-white">Add Parcel</button> </a>
 
-                    @if(Auth::user()->email == 'admin@123.com')
-                    <a class="text-center text-3xl mb-10" href="/add">Add Parcel</a>
-                    <p class="font-bold text-center">List of Parcels</p>
-                    @foreach($parcel as $p)
-
-                    <table class="">
-                        <tr class="w-max">
-                            <th class="w-1/6">Parcel No.</th>
-                            <th class="w-1/6">Location</th>
-                            <th class="w-1/6">Date</th>
-                            <th class="w-1/6">Remarks</th>
-                            <th class="w-1/12">Edit</th>
-                            <th class="w-1/12">Delete</th>
-                        </tr>
-                        <tr class="text-center">
-                            <td>{{$p->parcel_id}}</td>
-                            <td>{{$p->address}}</td>
-                            <td>{{$p->date}}</td>
-                            <td>{{$p->remarks}}</td>
-                            <td><a href="/edit/{{$p->id}}">Edit</a></td>
-                            <td><a href="/delete/{{$p->id}}">Delete</a></td>
-                        </tr>
-                    </table>
-                    @endforeach
-
-                    @else
-                    <label for="">Enter Parcel Number here</label>
-                    <form method="post" action="/search" class="flex">
-                        @csrf
-
-                        <input type="text" name="parcel_id" class="text-black" placeholder="Enter Parcel Number">
-                        <button type="submit" class="bg-green-500 rounded">Search</button>
-                    </form>
-
-                    <p class="font-bold text-center">List of Parcels</p>
-                    @if($parcelUser != null)
-                    @foreach($parcelUser as $p)
-                    <table class="">
-                        <tr>
-                            <th>Parcel No.</th>
-                            <th>Location</th>
-                            <th>Date</th>
-                            <th>Remarks</th>
-
-                        </tr>
-                        <tr class="text-center">
-                            <td>{{$p->parcel_id}}</td>
-                            <td>{{$p->address}}</td>
-                            <td>{{$p->date}}</td>
-                            <td>{{$p->remarks}}</td>
-
-                        </tr>
-                    </table>
-                    @endforeach
-                    @else
-                    <div class="text-center">Nothing Here ! Please search your parcel Number</div>
-                    @endif
-                    @endif
-                </div>
-            </div>
         </div>
     </div>
+
+    <div class="container mx-auto px-20 py-15 flex flex-col my-10 gap-5" id="track">
+        <div class="bg-blue-800 text-white rounded-2xl px-5 py-3">
+            <p class="text-2xl">Track Parcels</p>
+            <div class=" my-5">
+                <form method="post" class="flex gap-5 text-black" action="/dashboard">
+                    @csrf
+                    <input type="text" class="w-full rounded" name="parcel_id" placeholder="Parcel ID">
+                    <button class=" rounded-xl text-blue-500 bg-white px-3 py-2">Submit</button>
+                </form>
+            </div>
+
+
+        </div>
+
+
+
+
+        @if($pid!=null)
+        <div class="text-center text-xl font-bold">Showing result of parcel id {{$pid}}</div>
+        <div class="flex justify-start">
+
+            <a href="/update/{{$pid}}"><button class="bg-blue-800 rounded px-4 py-2 text-white">Add more details to this Parcel</button></a>
+        </div>
+        @endif
+
+
+
+        <div class=" flex flex-col  items-center justify-center">
+
+            @if(Auth::check())
+
+
+
+
+            @if($parcel!= null && sizeof($parcel))
+            @foreach($parcel as $parc)
+
+
+            @php
+            $pa=[
+            [
+            'date'=>$parc->date,
+            'time'=>$parc->time,
+            'remarks'=>$parc->remarks,
+            'status'=>$parc->status,
+            'id'=>$parc->id,
+            ],
+            ]
+            @endphp
+            @each('components.parcel-conditions',$pa,'p')
+            @endforeach
+            @else
+            <div class="font-bold text-xl text-red-500">Note: Please Enter Valid Parcel Number </div>
+
+            @endif
+            @endif
+        </div>
+    </div>
+
+
 </div>
 @endsection

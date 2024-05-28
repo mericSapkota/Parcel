@@ -19,33 +19,33 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@123.com',
-            'password' => 'admin'
-        ]);
-        DB::table('users')->insert([
-            'name' => 'user',
-            'email' => 'user@123.com',
-            'password' => 'user@123.com'
+            'password' => bcrypt('admin')
         ]);
 
         DB::table('admins')->insert([
+            'parcel_id'=>'1'
+        ]);
+
+
+        DB::table('parcel_details')->insert([
             'parcel_id' => '1',
             'address' => 'Thecho',
             'date' => '2024-01-01',
-            'remarks' => 'test1'
+            'remarks' => 'test1',
+            'status' => 'Order Confirmed',
+            'time' => '10:10:00',
         ]);
 
-        DB::table('admins')->insert([
-            'parcel_id' => '2',
+        DB::table('parcel_details')->insert([
+            'parcel_id' => '1',
             'address' => 'Lagankhel',
-            'date' => '2024-01-01',
-            'remarks' => 'test2'
+            'date' => '2024-01-02',
+            'status' => 'Reached Lagankhel',
+            'remarks' => 'Shipped to Lagankhel',
+            'time' => '9:00:00',
+
         ]);
 
-        DB::table('admins')->insert([
-            'parcel_id' => '3',
-            'address' => 'Patan',
-            'date' => '2024-01-05',
-            'remarks' => 'test3'
-        ]);
+       
     }
 }

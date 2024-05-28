@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Admin extends Model
 {
     use HasFactory;
-    protected $fillable = ['address', 'parcel_id', 'date', 'remarks'];
+    protected $fillable = ['parcel_id'];
+
+    public function parcelDetails()
+    {
+        return $this->hasMany(ParcelDetails::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\ParcelDetails;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -13,8 +14,12 @@ class Controller extends BaseController
     use AuthorizesRequests, ValidatesRequests;
     function search(Request $request)
     {
-        $parcelUser = Admin::where('parcel_id', $request->parcel_id)->get();
 
-        return view("/dashboard", compact('parcelUser'));
+        $parcel = ParcelDetails::where('parcel_id', $request->parcel_id)->get();
+        $pid = null;
+        foreach ($parcel as $p) {
+            $pid = $p->parcel_id;
+        }
+        return view("/welcome", compact('parcel', 'pid'));
     }
 }

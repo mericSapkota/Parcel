@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\ParcelDetails;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -28,9 +29,9 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        Admin::create($request->all());
-        $parcel = Admin::all();
-        return view("/dashboard", compact('parcel'));
+        Admin::create(['parcel_id' => $request->parcel_id]);
+        ParcelDetails::create($request->all());
+        return redirect('/dashboard');
     }
 
     /**
@@ -59,12 +60,39 @@ class AdminController extends Controller
         $parcel->update($request->all());
         return redirect("/dashboard");
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Admin $admin)
+    public function update1($id)
     {
-        //
+        $parcel = Admin::where('parcel_id', $id)->get();
+        $p = $parcel[0];
+
+        return view("update-parcel", compact('p'));
+    }
+    public function update2($id, Request $request)
+    {
+
+        ParcelDetails::create($request->all());
+        return redirect('/dashboard');
+    }
+
+    public function editCondition($id)
+    {
+        $parcel = ParcelDetails::find($id);
+
+        return view('components.edit-parcel-details', compact('parcel'));
+    }
+
+    public function storeEditedCondition($id, Request $request)
+    {
+        $parcel = ParcelDetails::find($id);
+
+        $parcel->update($request->all());
+
+        return redirect("/dashboard");
+    }
+    public function destroy(Admin $admin, $id)
+    {
+        $parcel = ParcelDetails::find($id);
+        $parcel->delete($parcel);
+        return redirect('/dashboard');
     }
 }

@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('parcel_details', function (Blueprint $table) {
             $table->id();
-            $table->string('parcel_id')->unique();
+            $table->foreignId('parcel_id')->constrained('admins')->onDelete('cascade');
+            $table->string('address');
+            $table->date('date');
+            $table->string('status');
+            $table->time('time');
+            $table->string('remarks');
             $table->timestamps();
         });
     }
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('parcel_details');
     }
 };
