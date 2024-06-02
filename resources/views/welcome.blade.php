@@ -832,14 +832,14 @@
 </head>
 
 <body class="antialiased">
-    <div class="flex flex-col gap-20 ">
+    <div class="flex flex-col gap-20  ">
 
 
 
-        <div name="header" class="flex px-20 w-full bg-blue-100 justify-between items-center">
-            <div class="px-5 py-3">
+        <div name="header" class="flex fixed px-20 w-full bg-blue-100 justify-between items-center">
+            <div class="w-14 flex items-center m-2 h-16">
 
-                <img src="{{('images/logo.png')}}" alt="">
+                <img class="rounded-full" src="{{('images/logo.jpg')}}" alt="">
             </div>
 
             <div class="px-5 py-3 text-lg font-bold flex gap-10">
@@ -866,9 +866,9 @@
             @endif
         </div>
 
-        <div class="container mx-auto h-[500px] flex px-20">
-            <div class="w-1/2 h-[500px]">
-                <img class="h-full" src="{{('images/banner.svg')}}" alt="">
+        <div class="container mx-auto h-full mt-16  flex p-20" id="home">
+            <div class="w-1/2 h-full">
+                <img class=" rounded" src="{{('images/img.jpg')}}" alt="">
             </div>
             <div class="flex w-1/2 ms-20  flex-col gap-5  justify-center">
                 <p class="text-2xl font-bold">Order Delivery Tracker</p>
@@ -884,7 +884,7 @@
             </div>
         </div>
 
-        <div class="container mx-auto p-20 h-max shadow-lg rounded-xl flex flex-col gap-5 my-10" id="track">
+        <div class="container mx-auto p-20 h-max shadow-lg rounded-xl flex flex-col gap-5 " id="track">
             <div class="bg-blue-800  text-white rounded-2xl px-5 py-3">
                 <p class="text-2xl">Track Your Order</p>
                 <div class=" my-5">
@@ -924,7 +924,7 @@
             </div>
         </div>
 
-        <div id="service" class="flex container gap-5 mx-auto px-20 ">
+        <div id="service" class="flex container gap-5 mx-auto  p-20 ">
 
             <div class="w-1/2 flex flex-col gap-5">
                 <p class="text-4xl font-bold">Our Services</p>
@@ -950,11 +950,11 @@
                 </div>
             </div>
             <div class="w-1/2   ">
-                <img src="{{('images/service.svg')}}" alt="">
+                <img class="rounded" src="{{('images/img2.jpg')}}" alt="">
             </div>
         </div>
 
-        <div id="review" class=" container mx-auto p-20 flex flex-col gap-5">
+        <div id="review" class=" container mx-auto  p-20 flex flex-col gap-5">
             <div>
                 <p class="text-3xl font-bold">Customer Review</p>
             </div>
@@ -979,6 +979,43 @@
 
                 <div class=" ps-20"><img src="{{('images/review.svg')}}" alt=""></div>
             </div>
+
+        </div>
+
+        <div class=" px-20 py-10 bg-gradient-to-r from-blue-600 to-blue-200 text-white" id="contact">
+            <div class="flex  gap-5 justify-around">
+                <div class="flex flex-col gap-5  ">
+                    <div class="w-60 h-32">
+                        <img class="w-full h-full object-cover object-center " src="{{('images/logo.jpg')}}" alt="">
+                    </div>
+                    <p class="w-60">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                        Sint repudiandae necessitatibus doloribus minima esse
+                        ipsam quas at. Fugiat recusandae et id culpa reprehenderit
+                        ipsa fuga? Omnis cumque odio error odit.</p>
+                </div>
+
+                <div class="flex flex-col gap-5">
+                    <div class="flex items-end h-32">
+                        <p class="text-2xl    font-bold ">Address</p>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <p>Lalitpur, 7cross</p>
+                        <p>01-5555555</p>
+                        <p>youremail@domain.com</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5 ">
+                    <div class="h-32 flex items-end">
+                        <p class="text-2xl   font-bold">Social Connect</p>
+                    </div>
+                    <div class="flex gap-5 items-center">
+                        <img class="h-10 w-10" src="{{('images/insta.png')}}" alt="">
+                        <img class="h-8 w-8" src="{{('images/facebook.png')}}" alt="">
+                        <img class="h-10 w-10" src="{{('images/telegram.png')}}" alt="">
+                    </div>
+                </div>
+            </div>
+
 
         </div>
 

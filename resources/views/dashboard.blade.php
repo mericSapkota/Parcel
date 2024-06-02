@@ -3,9 +3,9 @@
 <div>
 
     <div name="header" class="flex px-20 w-full bg-blue-100 justify-between items-center">
-        <div class="px-5 py-3">
+        <div class="w-14 flex items-center m-2 h-16">
 
-            <img src="{{('images/logo.png')}}" alt="">
+            <img class="rounded-full" src="{{('images/logo.jpg')}}" alt="">
         </div>
 
         <div class="px-5 py-3 text-xl font-bold flex gap-10">

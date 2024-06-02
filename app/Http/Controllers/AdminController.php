@@ -93,6 +93,6 @@ class AdminController extends Controller
     {
         $parcel = ParcelDetails::find($id);
         $parcel->delete($parcel);
-        return redirect('/dashboard');
+        return redirect('/dashboard'); 
     }
 }
